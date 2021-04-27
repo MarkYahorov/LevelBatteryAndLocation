@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">LevelBatteryAndLocation</string>
+    <string name="get_level_battery">Get level battery</string>
+    <string name="get_locate">Get locate</string>
+</resources>
