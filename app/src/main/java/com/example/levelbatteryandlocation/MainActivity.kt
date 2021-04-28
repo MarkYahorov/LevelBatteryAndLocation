@@ -1,14 +1,9 @@
 package com.example.levelbatteryandlocation
 
-import android.app.NotificationManager
-import android.os.BatteryManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.lifecycle.Observer
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import java.util.concurrent.TimeUnit
@@ -17,7 +12,7 @@ import java.util.concurrent.TimeUnit
 class MainActivity : AppCompatActivity() {
 
     private lateinit var getLevelBatteryBtn: Button
-    private lateinit var getLocationButton: Button
+    private lateinit var getMemoryBtn: Button
     private lateinit var text: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,11 +20,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         find()
         getLevelBattery()
+        getMemory()
     }
 
     private fun find() {
         getLevelBatteryBtn = findViewById(R.id.getLevelBatteryBtn)
-        getLocationButton = findViewById(R.id.getLocateBtn)
+        getMemoryBtn = findViewById(R.id.getMemoryBtn)
         text = findViewById(R.id.hyinyaAneTema)
     }
 
@@ -41,6 +37,18 @@ class MainActivity : AppCompatActivity() {
         )
             .build()
         getLevelBatteryBtn.setOnClickListener {
+            WorkManager.getInstance(this).enqueue(myWorkRequest)
+        }
+    }
+
+    private fun getMemory() {
+        val myWorkRequest = PeriodicWorkRequest.Builder(
+            MemoryWorker::class.java,
+            15,
+            TimeUnit.MINUTES
+        )
+            .build()
+        getMemoryBtn.setOnClickListener {
             WorkManager.getInstance(this).enqueue(myWorkRequest)
         }
     }
