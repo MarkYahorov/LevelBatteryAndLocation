@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
     private fun getLevelBattery() {
         val myWorkRequest = PeriodicWorkRequest.Builder(
             MyWorker::class.java,
-            1,
-            TimeUnit.HOURS
+            15,
+            TimeUnit.MINUTES
         )
             .build()
         getLevelBatteryBtn.setOnClickListener {

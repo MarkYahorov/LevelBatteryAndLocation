@@ -10,10 +10,5 @@ class MemoryWorker(context: Context, workerParams: WorkerParameters):Worker(cont
     override fun doWork(): Result {
         TODO("Not yet implemented")
     }
-
-   /* private fun getMemory(): Int {
-        val memoryWorker =
-            applicationContext.getSystemService(Context.STORAGE_SERVICE) as StorageManager
-        return memoryWorker.get
-    }*/
+    
 }

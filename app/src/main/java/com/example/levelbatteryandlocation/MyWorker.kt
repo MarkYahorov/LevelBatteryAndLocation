@@ -11,6 +11,9 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -26,6 +29,8 @@ class MyWorker(context: Context, workerParams: WorkerParameters) : Worker(contex
     }
 
     private fun showToastBatteryLevel(){
-        Toast.makeText(applicationContext, getBatteryLevel().toString(), LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(applicationContext, getBatteryLevel().toString(), LENGTH_SHORT).show()
+        }
     }
 }
